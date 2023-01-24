@@ -1,0 +1,193 @@
+<!-- ============ MODAL PARA AGREGAR =============== -->
+<ng-template class="template" #content let-c="close" let-d="dismiss">
+    <form [formGroup]="myForm" (ngSubmit)="guardar(myForm)"  errorTailor> <!-- (ngSubmit)="Guardar(myForm)"  -->
+      <div class="modal-header">
+        <h4 style="text-align: center;" class="modal-title" id="modal-basic-title">Registro Semanal</h4>
+        <button  type="button" class="btn-close" aria-label="Close" (click)="refresh()"  (click)="d('Cross click')"
+          ></button> <!-- (click)="refresh()" (click)="d('Cross click')" -->
+      </div>
+  
+      <div class="modal-body" mat-icon>
+  
+        <ng-template let-error let-text="text" #Error>
+          <!-- {{error|json}}{{text}} -->
+  
+          <div *ngIf="error?.minlength">
+            <i> <b>Error:</b>No cumples con los caracteres minimos que son
+              ({{error?.minlength?.requiredLength}}),ingresaste
+              solo:({{error?.minlength?.actualLength}})</i>
+          </div>
+        </ng-template>
+        <br>
+        
+        <div class="cont-nombre">
+          <mat-icon class="icons_usuario"> date_range</mat-icon>
+          <input class="controls" formControlName="dtfechainicio" type="date"
+            [controlErrorsTpl]="Error">
+        </div>
+        <br>
+        <div class="cont-nombre">
+          <mat-icon class="icons_usuario"> date_range</mat-icon>
+          <input class="controls" formControlName="dtfechafin" type="date"
+            [controlErrorsTpl]="Error">
+        </div>  
+        <br>
+        <div class="cont-nombre">
+          <mat-icon class="icons_usuario"> note_add</mat-icon>
+          <textarea name="textarea" class="controls"  formControlName="dsobservacion" [controlErrorsTpl]="Error"></textarea>
+        </div> 
+      </div>
+  
+      <div class="modal-footer">
+        <button title="Guardar y agregar" type="submit" class="save" (click)="errorbutton()" [disabled]="myForm.invalid" > <!-- (click)="errorbutton()" [disabled]="myForm.invalid"-->
+          <mat-icon id="icon-button">save add</mat-icon>
+        </button>
+  
+        <button title="Guardar y salir" type="submit" class="save-exit" (click)="refresh()" (click)="d('Cross click')"
+        (click)="errorbutton()" [disabled]="myForm.invalid" >
+          <mat-icon id="icon-button">save subdirectory_arrow_right</mat-icon>
+        </button>
+  
+        <button  type="button" (click)="refresh()" class="close" (click)="d('Cross click')"> <!-- (click)="refresh()" class="close" (click)="d('Cross click')" -->
+          Cancelar
+        </button>
+  
+      </div>
+    </form>
+  </ng-template>
+ 
+  
+
+  <h3 id="titulo">Bitacoras</h3><br>
+  <input class="from_control" id="filter" type="text" placeholder="Buscar..." [(ngModel)]="filterPost" name="filterPosts">
+  <label class="lanzar">Cargar Excel  <mat-icon id="icon-add2" title="Cargar Excel">cloud_upload</mat-icon>
+    <input type="file" class="" name="file" id="file" >
+  </label>
+    <!--(change)="ReadExcel($event)"-->
+    <button title="Nuevo Registro" class="lanzar2" (click)="open(content)" mat-icon mat-list-item> Nuevo
+      <mat-icon id="icon-add"> add_circle</mat-icon>
+    </button>
+    <table id="table" class="table table-bordered hover table-borderless">
+      <thead>
+        <tr>
+          <th style="text-align:center">N°</th>
+          <th style="text-align:center">Inicio</th>
+          <th style="text-align:center">Fin</th>
+          <th style="text-align:center">Historico Semanal</th>
+          <th style="text-align:center">Pendientes</th>
+          <th style="text-align:center; width: 250px;">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="text-align:center;" *ngFor="let item of datosBitacora | users:filterPost; index as i" > 
+          <td style="margin-top: 3%;">{{i +1}}</td>
+          <!--<td style="margin-top: 3%;">{{item.nmid}}</td>-->
+          <td style="margin-top: 3%;">{{item.dtfechainicio | date:'dd/MM/yyyy'}}</td>
+          <td style="margin-top: 3%;">{{item.dtfechafin | date:'dd/MM/yyyy'}}</td>
+          <td style="margin-top: 3%;">{{item.dsobservacion}}</td>
+          <td style="margin-top: 3%;">{{item.nmpendientes}}</td>
+          <td>
+              <button class="edit" mat-icon (click)="openEdit(addpendiente)" > 
+                <abbr title="Nuevo Pendiente">
+                  <mat-icon>add_circle</mat-icon>
+                </abbr>
+              </button>
+              <button class="edit2" mat-icon (click)="editar(item)" (click)="openEdit(content)"> 
+                <abbr title="Editar">
+                  <mat-icon>edit</mat-icon>
+                </abbr>
+              </button>
+              <a class="edit3" mat-icon routerLink="/pendientes" (click)="verPendientes(item)">
+                <abbr title="Ver Pendientes">
+                  <mat-icon>visibility</mat-icon>
+                </abbr>
+              </a>
+          </td>
+            <!-- ============ MODAL PARA AGREGAR PENDIENTE=============== -->      
+          <ng-template class="template" #addpendiente let-c="close" let-d="dismiss">
+            <form [formGroup]="myFormP" errorTailor (ngSubmit)="guardarPendiente(myFormP)">
+              <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Pendiente</h4>
+                <button  type="button" class="btn-close" aria-label="Close" (click)="refresh()" (click)="d('Cross click')"
+                  ></button> 
+              </div>
+              <input type="number" class="controls" formControlName="fk_bitacora" [(ngModel)]="item.nmid_bitacora" hidden >
+              <!--<p>{{item.nmid}}</p>-->
+              <div class="modal-body" mat-icon>
+          
+                <ng-template let-error let-text="text" #Error>
+                  <!-- {{error|json}}{{text}} -->
+          
+                  <div *ngIf="error?.minlength">
+                    <i> <b>Error:</b>No cumples con los caracteres minimos que son
+                      ({{error?.minlength?.requiredLength}}),ingresaste
+                      solo:({{error?.minlength?.actualLength}})</i>
+                  </div>
+                </ng-template>
+                <br>
+                
+                <div class="cont-nombre">
+                  <mat-icon class="icons_usuario"> date_range</mat-icon>
+                  <input class="controls" formControlName="dtfechareporte" type="date"  
+                    [controlErrorsTpl]="Error" [ngModel]='fechaActual | date:"yyyy-MM-dd"' readonly> 
+                </div>
+                <br>
+                <div class="cont-nombre">
+                  <mat-icon class="icons_usuario"> short_text</mat-icon>
+                  <input class="controls" formControlName="dspendiente" type="text" placeholder="Informacion de pendiente"
+                    [controlErrorsTpl]="Error">
+                </div>  
+                <br>
+                <div class="cont-nombre">
+                  <mat-icon class="icons_usuario"> supervised_user_circle</mat-icon>
+                  <input class="controls" formControlName="dsreportado" type="text" placeholder="Reportado"
+                    [controlErrorsTpl]="Error">
+                </div>  
+                <br>
+                <div class="cont-nombre">
+                  <mat-icon class="icons_usuario"> date_range</mat-icon>
+                  <input class="controls" formControlName="dtfechagestion" type="date"
+                    [controlErrorsTpl]="Error">
+                </div>
+                <br>
+                <div class="cont-nombre">
+                  <mat-icon class="icons_usuario"> short_text</mat-icon>
+                  <input class="controls" formControlName="dsgestion" type="text" placeholder="Informacion de gestion"
+                    [controlErrorsTpl]="Error">
+                </div> 
+                <div class="cont-tipouser">
+                  <mat-icon class="icons_usuario">check_circle</mat-icon>
+                  <select class="option" name="combo" formControlName="cdestado" [controlErrorsTpl]="Error" > 
+                    <option selected hidden value="" >Agregar Estado</option>
+                    <option value="P" >Pendiente</option>
+                    <option value="R" >Reportado</option>
+                    <option value="N" >No Aplica</option>
+                    <option value="S">Sin Gestion</option>
+                    <option value="C">Cerrado</option>
+                  </select>
+                </div>
+          
+              </div>
+          
+              <div class="modal-footer">
+                <button title="Guardar y agregar" type="submit" class="save" (click)="errorbuttontwo()" [disabled]="myFormP.invalid" > 
+                  <mat-icon id="icon-button">save add</mat-icon>
+                </button>
+          
+                <button title="Guardar y salir" type="submit" class="save-exit" (click)="refresh()" (click)="d('Cross click')"
+                (click)="errorbuttontwo()" [disabled]="myFormP.invalid"  >
+                  <mat-icon id="icon-button">save subdirectory_arrow_right</mat-icon>
+                </button>
+          
+                <button  type="button" class="close" (click)="d('Cross click')" (click)="refresh()">
+                  Cancelar
+                </button>
+          
+              </div>
+            </form>
+          </ng-template>
+        </tr>
+      </tbody>
+    </table>
+
+

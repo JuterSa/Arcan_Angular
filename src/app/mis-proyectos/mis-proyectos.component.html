@@ -1,0 +1,45 @@
+<h3 id="titulo">Mis Proyectos</h3><br>
+<input class="from_control" id="filter" type="text" placeholder="Buscar..." [(ngModel)]="filterPost" name="filterPosts">
+<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="table"
+    class="table table-bordered hover table-borderless">
+    <thead>
+        <tr>
+            <th style="text-align:center">Id</th>
+            <th style="text-align:center">Nombre cliente</th>
+            <th style="text-align:center">Nombre proyecto</th>
+            <th style="text-align:center">Estado</th>
+            <th style="text-align:center">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let item of datosProyecto | filterProject:filterPost">
+            <td style="margin-top: 5%; text-align: center;">{{item.nmid}}</td>
+            <td style="margin-top: 5%; text-align: center;">{{item.dscliente}}</td>
+            <td style="margin-top: 5%; text-align: center;">{{item.dsproyecto}}</td>
+            <td style="margin-top: 5%; text-align: center;">{{item.cdestado==='A'?'Activo':'Inactivo'}}</td>
+            <td>
+
+                <a class="artefacs" (click)="snav.toggle()" mat-list-item routerLink="/artefactos-de-proyecto"
+                    routerLinkActive='active' id="link-rol-menu">
+                    <abbr title="Artefactos">
+                        <mat-icon>
+                            list_alt
+                        </mat-icon>
+                    </abbr>
+                </a>
+
+                <a class="colaborators" (click)="mostrar2(item)" mat-list-item id="link-rol-menu"
+                    routerLink="/registro-de-tiempos">
+                    <abbr title="Registro de tiempos">
+                        <mat-icon>
+                            alarm</mat-icon>
+                    </abbr>
+                </a>
+
+            </td>
+
+        </tr>
+
+    </tbody>
+
+</table>

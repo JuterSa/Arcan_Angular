@@ -1,0 +1,45 @@
+<div class="toolbar-container">
+  <mat-toolbar class="header-toolbar">
+    <button mat-icon-button (click)="snav.toggle()">
+      <mat-icon class="icon">menu</mat-icon>
+    </button>
+    <mat-icon class="icon-person">person</mat-icon>
+    <p class="user">{{usuario}}</p>
+  </mat-toolbar>
+  <mat-sidenav-container class="sidenav-container" [style.marginTop.px]='mobileQuery.matches ? 56 : 0'>
+    <mat-sidenav #snav [mode]='mobileQuery.matches ? "over" : "side"' [fixedInViewport]='mobileQuery.matches'
+      fixedTopGap="56" class="sidenav">
+      <mat-nav-list class="nav-list">
+        <div>
+          <img src="../../../../assets/utils/LogoSoftcaribbean.png" class="menu-log">
+        </div>
+        <div class="items__container">
+          <div class="header">
+            <div class="lista">
+                <nav class="nav" (click)="mostrarHijo(item.nmid)" *ngFor="let item of datosOpcionPadre">
+                  <button class="boton1 btn" (click)="ocultar(item.nmid)">
+                    <mat-icon class="icon">{{item.dsicono}}</mat-icon>{{item.cdopcion}}
+                  </button>
+                  <ul class="lista" *ngFor="let item2 of datosOpcionidpadre">
+                    <li class="menuHijo" *ngIf="isShown && item2.nmid_padre==item.nmid">
+                        <a [routerLink]="item2.dsurl" class="btn">
+                          <mat-icon class="icon">{{item2.dsicono}}</mat-icon>{{item2.cdopcion}}
+                        </a>
+                    </li>
+                  </ul>
+                </nav>
+            </div>
+          </div>
+          <br>
+          <amplify-sign-out></amplify-sign-out>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="content">
+      <br><br><br>
+      <block-ui>
+        <router-outlet></router-outlet>
+      </block-ui>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

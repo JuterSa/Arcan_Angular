@@ -1,0 +1,504 @@
+body {
+    overflow-x: hidden;
+}
+
+
+#card {
+    background-color: white;
+    height: 93vh;
+}
+
+.title {
+    margin-left: 2.5vw;
+    margin-bottom: 2.5vw;
+    margin-top: 2.5vw;
+    display: inline-block;
+}
+
+:host .mat-form-field {
+    width: 100%;
+}
+
+.example-container {
+    width: 22vw;
+    max-width: 100%;
+    margin-left: 2.5vw;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.example-list {
+    border: solid 1px #ccc;
+    min-height: 60px;
+    background: white;
+    border-radius: 4px;
+    overflow: hidden;
+    display: block;
+}
+
+
+
+.cdk-drag-preview {
+
+    border-radius: 4px;
+    box-shadow: 0 5px 5px -3px rgba(34, 26, 26, 0.2),
+        0 8px 10px 1px rgba(34, 26, 26, 0.2),
+        0 3px 14px 2px rgba(34, 26, 26, 0.2);
+}
+
+.cdk-drag-placeholder {
+    opacity: 0;
+}
+
+.cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-box {
+    padding: 20px 10px;
+    margin: 5px;
+    border: solid 1px rgba(105, 188, 187, 255);
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+}
+
+.filter-button2 {
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  outline: none;
+  margin-top: 5%;
+  height: 2em;
+  margin-left: 5%;
+  display: inline-block;
+  position: sticky;
+  border-color: rgba(71, 115, 178, 255);
+  border-style: none;
+  color: white;
+  width: 3%;
+}
+
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.box {
+    display: block;
+    grid-auto-flow: column;
+    grid-column-gap: 10px;
+    text-align: right;
+}
+
+.description {
+    display: block;
+}
+
+.head-title {
+
+    background-color: rgb(228, 222, 222);
+    border-radius: 4px;
+    color: #777272;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.title-card {
+    margin-left: 2vw;
+    display: inline-block;
+    width: 10vw;
+}
+
+
+
+.modal-title {
+    color: rgb(24, 21, 15);
+    margin-left: 14vw;
+}
+
+.modal-header {
+    background-color: white;
+    border-color: white;
+    text-align: center;
+}
+
+.modal-body {
+    background-color: white;
+    border-color: white;
+}
+
+.modal-footer {
+    background-color: white;
+    border-color: white;
+}
+
+.lanzar {
+    background-color: rgba(71, 115, 178, 255);
+    border-radius: 4px;
+    outline: none;
+    height: 8.7vh;
+    margin-left: 7.3vw;
+    display: inline-block;
+    position: sticky;
+    border-color: rgba(71, 115, 178, 255);
+    border-style: none;
+    color: white;
+    width: 12%;
+    padding-top: 1.5%;
+}
+
+.lanzar:hover {
+    background-color: rgba(105, 188, 187, 255)
+}
+
+.lanzar2 {
+    background-color: rgba(71, 115, 178, 255);
+    width: 3vw;
+    border-radius: 0.5rem;
+    display: block;
+    border: solid;
+    border-width: thin;
+    border-color: rgba(71, 115, 178, 255);
+    color: white;
+    padding-top: 1.5%;
+    text-align: center;
+    box-shadow: 0px 2px 10px -2px black;
+    margin-top: 6vh;
+    margin-left: 15.5vw;
+}
+
+.lanzar2:hover {
+    background-color: rgba(105, 188, 187, 255)
+}
+
+.from_control {
+    background-color: gainsboro;
+    align-items: center;
+    display: inline-block;
+    margin-left: 5%;
+}
+
+#form-proyec {
+    border-radius: 1rem;
+    margin-left: 5%;
+    margin-top: 3%;
+    display: inline-block;
+    width: 18%;
+}
+
+#form-client {
+    align-items: center;
+    display: inline-block;
+    margin-left: 5%;
+    width: 18%;
+}
+
+
+
+.save {
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-right: 8%;
+    width: 20%;
+    height: 50px;
+    border: solid;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+    display: inline-block;
+    text-align: left;
+}
+
+.save:hover {
+    background-color: rgba(105, 188, 187, 255);
+    color: white;
+}
+
+.save-exit {
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-right: 8%;
+    width: 20%;
+    height: 50px;
+    border: solid;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+    display: inline-block;
+    text-align: left;
+}
+
+.save-exit:hover {
+    background-color: rgba(105, 188, 187, 255);
+    color: white;
+}
+
+.close {
+    background-color: white;
+    border-radius: 0.5rem;
+    margin-right: 10%;
+    width: 20%;
+    height: 50px;
+    border: solid;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+    display: inline-block;
+}
+
+.close:hover {
+  background-color: rgba(105, 188, 187, 255);
+  color: white;
+}
+
+.controls {
+    width: 66%;
+    height: calc(10vh - 6px);
+    margin-left: 22%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+}
+
+#start {
+    width: 66%;
+    height: calc(10vh - 6px);
+    margin-left: 22%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+}
+
+#finish {
+    width: 66%;
+    height: calc(10vh - 6px);
+    margin-left: 22%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+}
+
+.calendario {
+
+    margin-left: 48vw;
+    font-size: 140%;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    border-width: thin;
+    text-decoration: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+}
+
+#duracion {
+    width: 66%;
+    height: calc(10vh - 6px);
+    margin-left: 22%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: white;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+}
+
+.option {
+    background-color: white;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+    width: 66%;
+    height: calc(10vh - 6px);
+    margin-left: 22%;
+    display: flex;
+    text-decoration: none;
+    outline: none;
+    align-items: center;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    align-content: center;
+}
+
+.cont-list {
+    border: solid;
+}
+
+
+
+
+
+
+
+.contextual {
+    display: none;
+}
+
+.contextual.visible {
+    display: block;
+}
+
+.contextual.invisible {
+    display: none;
+}
+
+.title-modal-view {
+    border: none;
+    border-color: white;
+    border: hidden;
+}
+
+.modal-atribute1 {
+    display: inline-block;
+    margin-right: 6vw;
+}
+
+.modal-body2 {
+    background-color: white;
+    border-color: white;
+    margin-left: 5vw;
+    margin-bottom: 5vh;
+}
+
+.icon-button:hover {
+    color: rgba(105, 188, 187, 255);
+}
+
+.icon-button2:hover {
+    color: lightcoral;
+}
+
+.form-date {
+    display: inline-block;
+}
+
+.fecha {
+    display: inline-block;
+}
+
+.btn-fecha {
+    background-color: white;
+    border-radius: 0.5rem;
+    width: 3vw;
+    height: 6vh;
+    border: solid;
+    border-width: thin;
+    text-decoration: none;
+    outline: none;
+    border-color: rgba(71, 115, 178, 255);
+    color: rgba(71, 115, 178, 255);
+    display: inline-block;
+    text-align: left;
+    margin-left: 2vw;
+}
+
+
+.btn-fecha:hover {
+    background-color: rgba(105, 188, 187, 255);
+    color: white;
+}
+
+.total-horas {
+    display: inline-block;
+    font-size: 200%;
+    margin-left: 2vw;
+}
+
+#icon-client {
+    position: absolute;
+    color: rgba(71, 115, 178, 255);
+    font-size: 250%;
+    margin-left: 10%;
+    margin-top: 4%;
+
+}
+
+.title-tarea {
+    display: inline-block;
+}
+
+.nom-tarea {
+    display: inline-block;
+    margin-left: 2vw;
+}
+
+.cont-modal-1 {
+    display: inline-block;
+    width: 30vw;
+}
+
+.cont-modal-2 {
+    display: inline-block;
+    width: 20vw;
+    position: absolute;
+}
+
+.table-modal {
+    margin-right: 64px;
+    margin-top: 2vh;
+}
+
+.edit {
+    background-color: rgba(71, 115, 178, 255);
+    width: 3vw;
+    border-radius: 0.5rem;
+    display: inline-block;
+    border: solid;
+    border-width: thin;
+    border-color: rgba(71, 115, 178, 255);
+    color: white;
+    padding-top: 1.5%;
+    text-align: center;
+    box-shadow: 0px 2px 10px -2px black;
+}
+
+.edit:hover {
+    background-color: rgba(105, 188, 187, 255);
+    color: white;
+}

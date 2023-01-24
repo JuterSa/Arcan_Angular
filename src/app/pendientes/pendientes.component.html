@@ -1,0 +1,130 @@
+
+            <!-- ============ MODAL PARA AGREGAR PENDIENTE=============== -->      
+            <ng-template class="template" #addpendiente let-c="close" let-d="dismiss">
+                <form [formGroup]="myFormP" errorTailor (ngSubmit)="guardar(myFormP)">
+                  <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Pendiente</h4>
+                    <button  type="button" class="btn-close" aria-label="Close" (click)="refresh()" (click)="d('Cross click')"
+                      ></button> 
+                  </div>
+                  <div class="modal-body" mat-icon>
+              
+                    <ng-template let-error let-text="text" #Error>
+                      <!-- {{error|json}}{{text}} -->
+              
+                      <div *ngIf="error?.minlength">
+                        <i> <b>Error:</b>No cumples con los caracteres minimos que son
+                          ({{error?.minlength?.requiredLength}}),ingresaste
+                          solo:({{error?.minlength?.actualLength}})</i>
+                      </div>
+                    </ng-template>
+                    <br>
+                    
+                    <div class="cont-nombre">
+                      <mat-icon class="icon-client"> date_range</mat-icon>
+                      <input class="controls" formControlName="dtfechareporte" type="date"  
+                        [controlErrorsTpl]="Error" [ngModel]='fechaActual | date:"yyyy-MM-dd"' readonly> <!--[ngModel]='fechaActual | date:"yyyy-MM-dd"' readonly-->
+                    </div>
+                    <br>
+                    <div class="cont-nombre">
+                      <mat-icon class="icon-client"> short_text</mat-icon>
+                      <input class="controls" formControlName="dspendiente" type="text" placeholder="Informacion de pendiente"
+                        [controlErrorsTpl]="Error">
+                    </div>  
+                    <br>
+                    <div class="cont-nombre">
+                      <mat-icon class="icon-client"> supervised_user_circle</mat-icon>
+                      <input class="controls" formControlName="dsreportado" type="text" placeholder="Reportado"
+                        [controlErrorsTpl]="Error">
+                    </div>  
+                    <br>
+                    <div class="cont-nombre">
+                      <mat-icon class="icon-client"> date_range</mat-icon>
+                      <input class="controls" formControlName="dtfechagestion" type="date"
+                        [controlErrorsTpl]="Error">
+                    </div>
+                    <br>
+                    <div class="cont-nombre">
+                      <mat-icon class="icon-client"> short_text</mat-icon>
+                      <input class="controls" formControlName="dsgestion" type="text" placeholder="Informacion de gestion"
+                        [controlErrorsTpl]="Error">
+                    </div> 
+                    <div class="cont-tipouser">
+                      <mat-icon class="icon-client">check_circle</mat-icon>
+                      <select class="option" name="combo" formControlName="cdestado" [controlErrorsTpl]="Error" > 
+                        <option selected hidden value="" >Agregar Estado</option>
+                        <option value="P" >Pendiente</option>
+                        <option value="R" >Reportado</option>
+                        <option value="N" >No Aplica</option>
+                        <option value="S">Sin Gestion</option>
+                        <option value="C">Cerrado</option>
+                      </select>
+                    </div>
+              
+                  </div>
+              
+                  <div class="modal-footer">
+                    <button title="Guardar y agregar" type="submit" class="save" (click)="errorbuttontwo()" [disabled]="myFormP.invalid" > <!-- (click)="errorbutton()" [disabled]="myForm.invalid"-->
+                      <mat-icon id="icon-button">save add</mat-icon>
+                    </button>
+              
+                    <button title="Guardar y salir" type="submit" class="save-exit" (click)="refresh()" (click)="d('Cross click')"
+                    (click)="errorbuttontwo()" [disabled]="myFormP.invalid"  >
+                      <mat-icon id="icon-button">save subdirectory_arrow_right</mat-icon>
+                    </button>
+              
+                    <button  type="button" class="close" (click)="d('Cross click')" (click)="refresh()">
+                      Cancelar
+                    </button>
+              
+                  </div>
+                </form>
+              </ng-template>
+      <div id="titulo">
+          <h3>Pendientes</h3>
+          <br>
+        </div>
+        <br>
+        <input class="from_control" id="filter" type="text" placeholder='Buscar...' [(ngModel)]="filterPost" name="filterPosts"> <!--  [(ngModel)]="filterPost"-->
+        
+        <!--<button class="lanzar" mat-icon  mat-list-item  (click)="open(content)">
+          Nuevo<mat-icon id="icon-add"> add_circle</mat-icon>
+        </button>-->
+        
+        <table id="table" class="table table-bordered hover table-borderless">
+          <thead>
+            <tr>
+              <th style="text-align:center">N°</th>
+              <th style="text-align:center">Fecha</th>
+              <th style="text-align:center">Pendiente</th>
+              <th style="text-align:center">Reportado</th>
+              <th style="text-align:center">F.Gestion</th>
+              <th style="text-align:center">Gestion</th>
+              <!--<th style="text-align:center">F.Compromiso</th>-->
+              <th style="text-align:center">Estado</th>
+              <th style="text-align:center; width: 250px;">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="text-align:center;" *ngFor="let item of datosPendientes | users:filterPost; index as i" > <!-- *ngFor="let item of datosUsuarios | users:filterPost" -->
+              <td style="margin-top: 3%;">{{i +1}}</td>
+              <input type="text" [(ngModel)]="item.nmid_pendiente" hidden>
+              <!--<td style="margin-top: 3%;">{{item.nmid}}</td>-->
+              <td style="margin-top: 3%;">{{item.dtfechareporte | date:'dd/MM/yyyy'}}</td>
+              <td style="margin-top: 3%;">{{item.dspendiente}}</td>
+              <td style="margin-top: 3%;">{{item.dsreportado}}</td>
+              <td style="margin-top: 3%;">{{item.dtfechagestion | date:'dd/MM/yyyy'}}</td>
+              <td style="margin-top: 3%;">{{item.dsgestion}}</td>
+              <td style="margin-top: 3%;">{{item.cdestado}}</td>
+              <td>
+                  <button class="edit" mat-icon (click)="editar(item)" (click)="openEdit(addpendiente)"> <!-- (click)="Editar(item)" (click)="openEdit(content)"-->
+                    <abbr title="Editar">
+                      <mat-icon>edit</mat-icon>
+                    </abbr>
+                  </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+    
+  

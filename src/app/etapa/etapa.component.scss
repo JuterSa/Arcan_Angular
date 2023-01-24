@@ -1,0 +1,300 @@
+#titulo {
+  text-align: center;
+  margin-top: 2%;
+  margin-left: 5%;
+  display: inline-block;
+}
+#icon-add {
+  position: absolute;
+  color: white;
+  font-size: 200%;
+  margin-left: 8%;
+  margin-top: -2%;
+
+}
+#icon-add2 {
+  position: absolute;
+  color: white;
+  font-size: 150%;
+  margin-left: 8%;
+  margin-top: -2%;
+
+}
+.save {
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-right: 8%;
+  width: 20%;
+  height: 50px;
+  border: solid;
+  border-width: thin;
+  text-decoration: none;
+  outline: none;
+  border-color: rgba(71, 115, 178, 255);
+  color: rgba(71, 115, 178, 255);
+  display: inline-block;
+  text-align: left;
+}
+
+.save:hover {
+  background-color: rgba(105, 188, 187, 255);
+  color: white;
+}
+
+#icon-button {
+  margin-left: 20%;
+  margin-top: 2%;
+}
+.icon-in-etapa{
+  position: absolute;
+  color: rgba(71, 115, 178, 255);
+  font-size: 250%;
+  margin-left: 10%;
+  margin-top: 4%;
+}
+.close {
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-right: 11%;
+  width: 20%;
+  height: 50px;
+  border: solid;
+  border-width: thin;
+  text-decoration: none;
+  outline: none;
+  border-color: rgba(71, 115, 178, 255);
+  color: rgba(71, 115, 178, 255);
+  display: inline-block;
+}
+
+.close:hover {
+  background-color: rgba(105, 188, 187, 255);
+  color: white;
+}
+.icon-button {
+  margin-left: 20%;
+  margin-top: 2%;
+}
+
+.lanzar {
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  outline: none;
+  margin-top: 5%;
+  height: 3em;
+  margin-left: 55vw;
+
+  display: inline-block;
+  position: sticky;
+  border-color: rgba(71, 115, 178, 255);
+  border-style: none;
+  color: white;
+  width: 12%;
+  text-align: left;
+  padding-left: 3%;
+}
+
+.lanzar:hover {
+  background-color: rgba(105, 188, 187, 255)
+}
+.lanzar2 {
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  outline: none;
+  margin-top: 5%;
+  height: 3em;
+  margin-left: 5%;
+  display: inline-block;
+  position: sticky;
+  border-color: rgba(71, 115, 178, 255);
+  border-style: none;
+  color: white;
+  width: 14%;
+  text-align: left;
+  padding-left: 3%;
+}
+
+.botones{
+  text-align: right;
+}
+.lanzar2:hover {
+  background-color: rgba(105, 188, 187, 255)
+}
+table {
+  text-align: center;
+  width: 90%;
+  margin:1rem auto;
+}
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+.savet {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+  font-size: 18px;
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  margin:1rem auto;
+  max-width: 600px;
+  box-shadow: -1px 3px 66px 0px rgba(0,0,0,0.75);
+  padding: 1rem;
+}
+#table {
+  border-radius: 1rem;
+  margin-top: 2%;
+  width: 90%;
+  margin-left: 5%;
+  background-color: white;
+  box-shadow: 0px 2px 10px -6px black;
+
+}
+
+th {
+  background-color: rgba(243, 244, 246, 255);
+  border: none;
+  border-top: white;
+}
+.modal-title {
+  color: rgb(24, 21, 15);
+  margin-left: auto;
+}
+
+.modal-header {
+  background-color: white;
+  border-color: white;
+}
+.modal-body {
+  background-color: white;
+  border-color: white;
+}
+
+.modal-footer {
+  background-color: white;
+  border-color: white;
+}
+.save {
+  background-color: white;
+  border-radius: 0.5rem;
+  margin-right: 8%;
+  width: 20%;
+  height: 50px;
+  border: solid;
+  border-width: thin;
+  text-decoration: none;
+  outline: none;
+  border-color: rgba(71, 115, 178, 255);
+  color: rgba(71, 115, 178, 255);
+  display: inline-block;
+  text-align: left;
+}
+
+.save:hover {
+  background-color: rgba(105, 188, 187, 255);
+  color: white;
+}
+.controls {
+  width: 66%;
+  height: calc(10vh - 6px);
+  margin-left: 22%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: white;
+  border-width: thin;
+  text-decoration: none;
+  outline: none;
+  border-color: rgba(71, 115, 178, 255);
+  color: rgba(71, 115, 178, 255);
+}
+th {
+  background-color: rgba(243, 244, 246, 255);
+  border: none;
+  border-top: white;
+}
+
+td {
+  background-color: white;
+  border-color: white;
+}
+
+.cambio{
+  height: 5vh;
+  color: #ffffff;
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  border:none;
+
+}
+
+.cambio:hover{
+  background-color: rgba(105, 188, 187, 255)
+}
+input[type="file"]{
+  display: none;
+}
+
+
+.btn-modal, .btnfile{
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  outline: none;
+  margin-top: 5%;
+  height: 3em;
+  display: inline-block;
+  position: sticky;
+  border-color: rgba(71, 115, 178, 255);
+  border-style: none;
+  color: white;
+  width: 22%;
+  text-align: left;
+  padding-left: 3%;
+}
+.btn-modal:hover, .btnfile:hover{
+  background-color: rgba(105, 188, 187, 255)
+}
+.btn-modal2{
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  outline: none;
+  margin-top: 5%;
+  height: 3em;
+  display: inline-block;
+  position: sticky;
+  border-color: rgba(71, 115, 178, 255);
+  border-style: none;
+  color: white;
+  width: 22%;
+  text-align: left;
+  padding-left: 3%;
+}
+.btn-modal2:hover{
+  background-color: rgba(105, 188, 187, 255)
+}
+.inputfile{
+  background-color: rgba(71, 115, 178, 255);
+  border-radius: 0.5rem;
+  outline: none;
+  margin-top: 5%;
+  height: 3em;
+  display: inline-block;
+  position: sticky;
+  border-color: rgba(71, 115, 178, 255);
+  border-style: none;
+  color: white;
+  width: 40%;
+  text-align: left;
+  padding-left: 3%;
+}
+.inputfile:hover{
+  background-color: rgba(105, 188, 187, 255)
+}

@@ -1,0 +1,173 @@
+<div>
+  <h3 id="titulo">Solicitud de permisos</h3>
+  <div>
+    <button class="ver" mat-icon mat-list-item (click)="open(content)" (click)="refresh()">
+      <abbr title="Solicitudes de permisos">
+        <mat-icon class="icono" id="icon-add">assignment</mat-icon>
+      </abbr>
+    </button>
+  </div>
+  <br><br>
+  <form class="form" [formGroup]="myForm" (ngSubmit)="guardar(myForm)">
+    <div class="encabezado">
+      <div>
+        <img src="./assets/utils/LogoSoftcaribbean.png" class="img">
+      </div>
+      <div style="margin-left: 25%; margin-top: 15px;">
+        <mat-icon class="titulo-fecha">calendar_today</mat-icon>
+        <input class="fecha" formControlName="fesolicitud" [value]="this.today" type="date" readonly>
+      </div>
+    </div>
+
+    <div class="info">
+      <h4 class="datos">Datos generales</h4>
+        <div class="personas">
+          <mat-icon class="lb-documento">chrome_reader_mode</mat-icon>
+          <input class="ip-documento" formControlName="cdidentificacion" type="number" placeholder="Ingres su Documento" [controlErrorsTpl]="Error">
+          <mat-icon class="lb-nombre">perm_identity</mat-icon>
+          <input class="ip-nombre" formControlName="dsnombrecompleto" type="text" placeholder="Ingrese su Nombre Completo" [controlErrorsTpl]="Error">
+          <mat-icon class="lb-cargo">work</mat-icon>
+          <input class="ip-cargo" formControlName="dscargo" type="text" placeholder="Ingrese su cargo" [controlErrorsTpl]="Error">
+          <mat-icon class="lb-correo">contact_mail</mat-icon>
+          <input class="ip-correo" formControlName="dscorreo" type="email" placeholder="Ingrese su Correo" [controlErrorsTpl]="Error">
+          <mat-icon class="lb-telefono">contact_phone</mat-icon>
+          <input class="ip-telefono" formControlName="nmtelefono" type="number" placeholder="Ingrese su Telefono" [controlErrorsTpl]="Error">
+        </div><br>
+
+        <div>
+          <mat-radio-group class="permisos" formControlName="dspermiso">
+            <mat-radio-button style="margin: 10px" color="primary" value="permiso-horas">Permiso en horas</mat-radio-button>
+            <mat-radio-button style="margin: 10px" color="primary" value="permiso-dias">Permiso en días</mat-radio-button>
+          </mat-radio-group>
+        </div><br>
+
+        <div class="tiempo" *ngIf="this.myForm.value.dspermiso=='permiso-dias'">
+          <mat-icon class="lb-desde">calendar_today</mat-icon>
+          <input class="ip-desde" formControlName="fedesde" type="text" placeholder="Desde" onfocus="(this.type = 'date')" [min]="today">
+          <mat-icon class="lb-hasta">calendar_today</mat-icon>
+          <input class="ip-hasta" formControlName="fehasta" type="text" placeholder="Hasta" onfocus="(this.type = 'date')" [min]="today">
+        </div>
+      </div><br>
+
+    <div>
+      <h4 class="datos">Compensación del permiso</h4>
+        <mat-icon class="lb-telefono">update</mat-icon>
+          <select name="cambio" class="select" formControlName="dsreponer_tiempo">
+            <option select hidden [ngValue]="null">Seleccione una opción: </option>
+            <option value="si">Si</option>
+            <option value="no">No</option>
+          </select><br>
+        <div *ngIf="this.myForm.value.dsreponer_tiempo=='si'">
+          <mat-icon class="lb-telefono">av_timer</mat-icon>
+          <input class="ip-forma" formControlName="dsforma_reponer_tiempo" type="text" [controlErrorsTpl]="Error">
+        </div>
+    </div><br>
+
+    <div>
+      <h4 class="datos">Motivo de solicitud</h4>
+      <div>
+        <mat-radio-group class="solicitud" formControlName="dsmotivos">
+          <mat-radio-button style="margin: 5px" color="primary" value="asunto-personal">Asuntos Personales</mat-radio-button>
+          <mat-radio-button style="margin: 5px" color="primary" value="situacion-medica">Situación Académica</mat-radio-button>
+          <mat-radio-button style="margin: 5px" color="primary" value="sindicales">Sindicales</mat-radio-button>
+          <mat-radio-button style="margin: 5px" color="primary" value="calamidad-domestica">Calamidad Domestica</mat-radio-button>
+          <mat-radio-button style="margin: 15px" color="primary" value="situacion-administrativa">Situaciones Administrativas</mat-radio-button>
+          <mat-radio-button style="margin: 15px" color="primary" value="licencia-no-remunerada">Licencias no Remuneradas</mat-radio-button>
+          <mat-radio-button style="margin: 15px" color="primary" value="compensatorio">Compensatorio</mat-radio-button>
+          <mat-radio-button style="margin: 5px" color="primary" value="otros">Otros</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div><br>
+
+    <div>
+      <h4 class="datos">Anexos (PDF o Imagenes)</h4>
+    </div><br>
+
+    <div>
+      <h4 class="datos">Permiso para situaciones médicas</h4>
+      <div>
+        <mat-radio-group class="examenes" formControlName="dssituaciones">
+          <mat-radio-button style="margin: 10px" color="primary" value="consulta-medica">Consultas Médicas y/o Odontológicas</mat-radio-button>
+          <mat-radio-button style="margin: 10px" color="primary" value="examenes-medicos">Exámenes Médicos y/o Odontológicos</mat-radio-button>
+        </mat-radio-group>
+      </div>
+    </div><br>
+
+    <div>
+      <h4 class="datos">Observaciones</h4>
+      <div>
+        <textarea class="observaciones" name="observaciones" formControlName="dsobservaciones"></textarea>
+      </div>
+    </div><br>
+
+    <div>
+      <h4 class="datos">Observaciones de recursos humanos</h4>
+      <div>
+        <textarea class="recursos" name="datos" formControlName="dsrecursos_humanos"></textarea>
+      </div>
+    </div>
+
+    <div>
+      <h4 class="datos">Observaciones jefe inmediato</h4>
+      <div>
+        <textarea class="seguimiento" name="seguimiento" formControlName="dsobservaciones_jefe"></textarea>
+      </div>
+    </div>
+
+    <div>
+      <button (click)="formulario()" class="cancelar" type="button">Cancelar</button>
+      <button type="submit" class="enviar" [disabled]="myForm.invalid">Enviar</button>
+    </div>
+
+    <ng-template class="template" #content let-c="close" let-d="dismiss">
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Solicitudes de permisos</h4>
+          <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+        </div>
+        <br>
+      <table class="table table-bordered hover table-borderless">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Fecha solicitud</th>
+            <th>Desde</th>
+            <th>Hasta</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of datosPermisos; index as i">
+            <td>{{i +1}}</td>
+            <td>{{item.fesolicitud}}</td>
+            <td>{{item.fedesde}}</td>
+            <td>{{item.fehasta}}</td>
+            <td>{{item.cdestado}}</td>
+            <td>
+              <button class="edit" mat-icon (click)="editar(item)" (click)="d('Cross click')">
+                <abbr title="Editar">
+                  <mat-icon>edit</mat-icon>
+                </abbr>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="modal-footer">
+        <button type="button" class="close" (click)="d('Cross click')">
+          Salir
+        </button>
+      </div>
+  </ng-template>
+
+    <ng-template let-error let-text="text" #Error>
+      <div *ngIf="error?.minlength">
+        <i>
+          <b>Error:</b>No cumples con los caracteres minimos que son
+            ({{error?.minlength?.requiredLength}}),ingresaste
+            solo:({{error?.minlength?.actualLength}})
+        </i>
+      </div>
+    </ng-template>
+  </form>
+</div>

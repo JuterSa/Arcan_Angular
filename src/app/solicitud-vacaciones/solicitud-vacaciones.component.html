@@ -1,0 +1,171 @@
+<h2 class="titulo">Solicitud de vacaciones</h2><br><br>
+<div class="botones">
+  <button class="lanzar" mat-icon mat-list-item (click)="open(content)" (click)="refresh()">
+    <abbr title="Solicitudes de vacaciones">
+      <mat-icon class="icon" id="icon-add">assignment</mat-icon>
+    </abbr>
+  </button>
+</div><br>
+<form action="" class="form" [formGroup]="myForm" (ngSubmit)="enviar(myForm)">
+  <div class="form_container">
+    <div class="form_group">
+      <abbr title="Fecha solicitud">
+        <mat-icon class="icono">today</mat-icon>
+      </abbr>
+      <input type="date" formControlName="fesolicitud" class="form_input1" readonly>
+      <abbr title="Solicitadas a:">
+        <mat-icon class="icono">record_voice_over</mat-icon>
+      </abbr>
+      <input formControlName="dssolicitada" class="form_input_soli" type="text" placeholder="Solicitar a:"
+        [controlErrorsTpl]="Error"><br>
+    </div>
+    <div class="form_group">
+      <h5 class="form_h5">Datos del Empleado</h5>
+      <mat-icon class="icono">perm_identity</mat-icon>
+      <input type="text" id="name" class="form_input" placeholder="Nombre del empleado"><br>
+      <mat-icon class="icono">chrome_reader_mode</mat-icon>
+      <input type="number" id="Documento" class="form_input" placeholder="N° de Cedula"><br>
+      <mat-icon class="icono">work</mat-icon>
+      <input type="text" id="cargo" class="form_input" placeholder="Cargo empleado"><br>
+      <mat-icon class="icono">contact_mail</mat-icon>
+      <input formControlName="dscorreo" type="email" id="dscorreo" class="form_input" placeholder="Correo"
+        [controlErrorsTpl]="Error"><br>
+    </div>
+    <div class="form_group">
+      <h5 class="form_h5">Período Vacaciones Solicitado</h5>
+      <mat-icon class="icono">today</mat-icon>
+      <input formControlName="fedesde" class="form_input_fecha2" type="text"  placeholder="Fecha inicio vacaciones"
+        [controlErrorsTpl]="Error" onfocus="(this.type = 'date')" [min]="today" ><br>
+      <abbr title="Fecha inicio vacaciones">
+        <mat-icon class="icono">event</mat-icon>
+      </abbr>
+      <input formControlName="fehasta" class="form_input_fecha2" type="text"  placeholder="Fecha fin de vacaciones"
+        [controlErrorsTpl]="Error" onfocus="(this.type = 'date')" [min]="today"><br>
+      <abbr title="Fecha fin de vacaciones">
+        <mat-icon class="icono">access_alarm</mat-icon>
+      </abbr>
+      <input formControlName="fereintegro" class="form_input_fecha2" type="text" placeholder="Fecha reintegro labores"
+        [controlErrorsTpl]="Error" onfocus="(this.type = 'date')" [min]="today"><br>
+      <abbr title="Total, días solicitados">
+        <mat-icon class="icono">insert_invitation</mat-icon>
+      </abbr>
+      <input type="number" id="nmdias" class="form_input_fecha2" placeholder="Total, días solicitados"><br>
+
+
+      <abbr title="Pago de Vacaciones">
+        <mat-icon class="icono"> monetization_on</mat-icon>
+      </abbr>
+      <mat-radio-group formControlName="dspago" color="primary" class="form_input_fecha3" [controlErrorsTpl]="Error">
+        <mat-radio-button style="margin:10px;" value="Comenzando_Vacaciones">Comenzando vacaciones</mat-radio-button>
+        <mat-radio-button style="margin:10px;" value="Con_la_Nomina">Con la nómina</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="form_group">
+      <h5 class="form_h5">Entrega de Responsabilidades</h5>
+      <abbr title="Fecha Inicio Entrega">
+        <mat-icon class="icono">today</mat-icon>
+      </abbr>
+      <input formControlName="feinicioentregas" class="form_input_fecha2" type="text" placeholder="Fecha inicio entrega"
+        [controlErrorsTpl]="Error" onfocus="(this.type = 'date')" [min]="today"><br>
+      <abbr title="Fecha Fin Entrega">
+        <mat-icon class="icono">event</mat-icon>
+      </abbr>
+      <input formControlName="fefinentregas" class="form_input_fecha2" type="text" placeholder="Fecha fin entrega"
+        [controlErrorsTpl]="Error" onfocus="(this.type = 'date')" [min]="today"><br>
+      <abbr title="Persona que Recibe">
+        <mat-icon class="icono">person_pin</mat-icon>
+      </abbr>
+      <input formControlName="dspersonarecibe" type="text" id="name" class="form_input" placeholder="Persona que recibe"
+        [controlErrorsTpl]="Error">
+    </div>
+    <div>
+      <h5 class="form_h5">Actividades de Entrega</h5>
+      <table class="form_table" id="tblTareas">
+        <thead>
+          <tr>
+            <th class="thform">Actividades/Cliente</th>
+            <th class="thform">Tareas</th>
+            <th class="thform">Empleado que Recibe</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><textarea class="tdform" [controlErrorsTpl]="Error" formControlName="dsactividad"
+                type="text"></textarea></td>
+            <td><textarea class="tdform" [controlErrorsTpl]="Error" formControlName="dstarea" type="text"></textarea>
+            </td>
+            <td><textarea class="tdform" [controlErrorsTpl]="Error" formControlName="dsempleadorecibe"
+                type="text"></textarea></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="form_group">
+      <h5 class="form_h5">Observaciones</h5>
+      <input [controlErrorsTpl]="Error" formControlName="dsobservaciones" class="form_textarea" type="text"><br>
+    </div>
+    <div class="form_group">
+      <h5 class="form_h5">Observaciones Gestion humana</h5>
+      <input [controlErrorsTpl]="Error" formControlName="dsobserva_ghumana" class="form_textarea" type="text"><br>
+    </div>
+    <div class="form_group">
+      <h5 class="form_h5">Observaciones Jefe</h5>
+      <input [controlErrorsTpl]="Error" formControlName="dsobserva_jefe" class="form_textarea" type="text"><br>
+    </div>
+    <div>
+      <button type="button" class="cancelar" (click)="formulario()">Cancelar</button>
+      <button type="submit" class="enviar" [disabled]="myForm.invalid">Enviar</button>
+    </div>
+  </div>
+</form>
+
+<!-- Modal de solicitudes -->
+<ng-template class="template" #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Solicitudes de vacaciones</h4>
+    <button type="button" class="btn-close" (click)="d('Cross click')"></button>
+  </div>
+  <br>
+  <table class="table table-bordered hover table-borderless">
+    <thead>
+      <tr>
+        <th>N°</th>
+        <th>Fecha Solicitud</th>
+        <th>Desde</th>
+        <th>Hasta</th>
+        <th>Estado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of datosVacaciones; index as i">
+        <td>{{i +1}}</td>
+        <td>{{item.fesolicitud}}</td>
+        <td>{{item.fedesde}}</td>
+        <td>{{item.fehasta}}</td>
+        <td>{{item.cdestado}}</td>
+        <td>
+          <button class="edit" mat-icon (click)="editar(item)" (click)="d('Cross click')">
+            <abbr title="Editar">
+              <mat-icon class="">edit</mat-icon>
+            </abbr>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="modal-footer">
+    <button type="button" class="close" (click)="d('Cross click')">
+      Salir
+    </button>
+  </div>
+</ng-template>
+
+<!-- control de errores -->
+<ng-template let-error let-text="text" #Error>
+  <div *ngIf="error?.minlength">
+    <i> <b>Error:</b>No comples con los caracteres minomos que son
+      ({{error?.minlength?.requiredLength}}),ingresaste
+      solo:({{error?.minlength?.actualLength}}) </i>
+  </div>
+</ng-template>

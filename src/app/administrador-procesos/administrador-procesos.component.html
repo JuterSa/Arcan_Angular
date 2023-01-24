@@ -1,0 +1,145 @@
+<ng-template class="template" #content let-c="close" let-d="dismiss">
+  <form [formGroup]="myForm" (ngSubmit)="guardar(myForm)" errorTailor>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Procesos</h4>
+      <button type="button" id="btn-close" class="btn-close" aria-label="Close"
+      (click)="d('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+      <div class="cont-nombre" id="a">
+        <mat-icon title="Proceso" class="icons_usuario">settings_backup_restore</mat-icon>
+        <input class="controls" type="text" placeholder="Proceso" formControlName="dsproceso">
+      </div>
+      <div id="a">
+        <mat-icon title="Nomenclatura" class="icons_usuario">settings</mat-icon>
+        <input class="controls" type="text" placeholder="Nomenclatura" formControlName="cdproceso">
+      </div><br>
+      <div class="cont-nombre" id="a">
+        <mat-icon title="Rol" class="icons_usuario">perm_identity</mat-icon>
+        <select class="controls" name="combo" placeholder="cdrol" formControlName="cdrol">
+          <option selected hidden [ngValue]="null">Rol</option>
+          <option value="Director de proyecto">Director de proyecto</option>
+          <option value="Scrum master">Scrum master</option>
+          <option value="Analista de desarrollo">Analista de desarrollo</option>
+          <option value="Analista QA">Analista QA</option>
+        </select>
+      </div>
+      <div class="cont-nombre" id="a">
+        <mat-icon title="Tipo" class="icons_usuario">supervisor_account</mat-icon>
+        <select class="controls" name="combo" placeholder="cdtipo" formControlName="cdtipo">
+          <option selected hidden [ngValue]="null">Tipo</option>
+          <option value="Agregar">Agregar</option>
+          <option value="Editar">Editar</option>
+          <option value="Actualizar">Actualizar</option>
+        </select>
+      </div>
+      <div class="cont-nombre" id="a">
+        <mat-icon title="Estado" class="icons_usuario">thumbs_up_down</mat-icon>
+        <select class="controls" name="combo" formControlName="cdestado">
+          <option selected hidden [ngValue]="null">Estado</option>
+          <option value="A">Activo</option>
+          <option value="I">Inactivo</option>
+        </select>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" [disabled]="myForm.invalid" class="save">
+        <abbr title="Guardar y agregar">
+          <mat-icon id="icon-button">save add</mat-icon>
+        </abbr>
+      </button>
+
+      <button type="submit" [disabled]="myForm.invalid" class="save-exit" (click)="d('Cross click')"
+        (click)="refresh()">
+        <abbr title="Guardar y salir">
+          <mat-icon id="icon-button">save subdirectory_arrow_right</mat-icon>
+        </abbr>
+      </button>
+      <button class="close" type="button" (click)="refresh()" (click)="d('Cross click')">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<ng-template class="template" #content2 let-c="close" let-d="dismiss">
+  <form [formGroup]="myForm" errorTailor>
+    <div class="modal-header">
+      <h4 class="modal-title2" id="modal-basic-title">Historial de edición</h4>
+      <button type="button" id="btn-close" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body2">
+      <table id="table" class="table table-bordered hover table-borderless">
+        <thead>
+          <tr>
+            <th style="text-align:center">Nombre</th>
+            <th style="text-align:center">Rol</th>
+            <th style="text-align:center">Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="text-align:center;" *ngFor="let item of datosProceso">
+            <td style="margin-top: 3%;"> {{item.dsproceso}} </td>
+            <td style="margin-top: 3%;"> {{item.cdrol}} </td>
+            <td style="margin-top: 3%;"> {{item.dtfechacreacion}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="modal-footer">
+      <button class="close" type="button" (click)="d('Cross click')">
+        Salir
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<h3 id="titulo">Administrador de procesos</h3><br>
+<input class="from_control" id="filter" type="text" placeholder="Buscar..." [(ngModel)]="filterPost" name="filterPosts">
+<button type="submit" [disabled]="myForm.invalid" class="lanzar" (click)="open(content)" mat-icon mat-list-item>Nuevo
+  <mat-icon id="icon-add"> add_circle</mat-icon>
+</button>
+<button type="submit" class="lanzar2" (click)="open2(content2)" mat-icon mat-list-item>
+  <abbr title="Historial">
+    <mat-icon id="icon-add">receipt</mat-icon>
+  </abbr>
+</button>
+
+<table id="table" class="table table-bordered hover table-borderless">
+  <thead>
+    <tr>
+      <th style="text-align:center">Id</th>
+      <th style="text-align:center">Secuencia</th>
+      <th style="text-align:center">Proceso</th>
+      <th style="text-align:center">Nomenclatura</th>
+      <th style="text-align:center">Rol</th>
+      <th style="text-align:center">Tipo</th>
+      <th style="text-align:center">Estado</th>
+      <th style="text-align:center">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="text-align:center;" *ngFor="let item of datosProceso | filterProcesos: filterPost">
+      <td style="margin-top: 3%;">{{item.nmid}}</td>
+      <td style="margin-top: 3%;">{{item.nmsecuencia}}</td>
+      <td style="margin-top: 3%;">{{item.dsproceso}}</td>
+      <td style="margin-top: 3%;">{{item.cdproceso}}</td>
+      <td style="margin-top: 3%;">{{item.cdrol}}</td>
+      <td style="margin-top: 3%;">{{item.cdtipo}}</td>
+      <td style="margin-top: 3%;">{{item.cdestado==='A'?'Activo':'Inactivo'}}</td>
+      <td style="margin-top: 3%;">
+        <button (click)="editar(item)" (click)="openEdit(content)" class="edit" mat-icon>
+          <abbr title="Editar">
+            <mat-icon>edit</mat-icon>
+          </abbr>
+        </button>
+        <button class="edit3" mat-icon>
+          <abbr title="Opciones">
+            <mat-icon>manage_accounts</mat-icon>
+          </abbr>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

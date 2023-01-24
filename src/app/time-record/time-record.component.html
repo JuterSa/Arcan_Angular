@@ -1,0 +1,378 @@
+<body>
+  <ng-template class="template" #content let-c="close" let-d="dismiss">
+    <form [formGroup]="timeForm" errorTailor>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Registro</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+      </div>
+      <div class="modal-body">
+        <div class="cont-nombre">
+          <mat-icon id="icon-client">assignment_late</mat-icon>
+          <input class="controls" type="text" formControlName="cdregistro" placeholder="Ingrese nombre del registro"
+            [controlErrorsTpl]="Error" />
+        </div>
+        <ng-template let-error let-text="text" #Error>
+          <!-- {{error|json}}{{text}} -->
+
+          <div *ngIf="error?.minlength">
+            <i>
+              <b>Error:</b>No comples con los caracteres minomos que son ({{
+              error?.minlength?.requiredLength
+              }}),ingresaste solo:({{ error?.minlength?.actualLength }})</i>
+          </div>
+        </ng-template>
+
+        <br />
+        <div>
+          <div id="fecha-ini">
+            <mat-icon id="icon-client">assignment</mat-icon>
+            <input id="start" class="fecha-ini" type="tex" formControlName="dsregistro"
+              placeholder="Ingrese la descripción " [controlErrorsTpl]="Error" />
+          </div>
+
+          <br />
+          <div class="cont-nombre">
+            <mat-icon id="icon-client">alarm_on</mat-icon>
+            <select class="option" name="combo" formControlName="modulo" [controlErrorsTpl]="Error"
+              placeholder="Módulo">
+              <option [ngValue]="null">Modulo: </option>
+              <option value="Desarrollo">Desarrollo</option>
+              <option value="Documentación">Documentación</option>
+              <option value="Capacitación">Capacitación</option>
+              <option value="Reunión">Reunión</option>
+              <option value="Prueba">Prueba</option>
+              <option value="Permiso">Permiso</option>
+            </select>
+          </div>
+          <br />
+          <div id="tiempo">
+            <mat-icon id="icon-client">alarm</mat-icon>
+            <input id="duracion" type="number" formControlName="horasestimadas" placeholder="Horas estimadas"
+              [controlErrorsTpl]="Error" />
+          </div>
+        </div>
+        <br />
+        <mat-icon id="icon-client"> edit_attributes</mat-icon><select class="option" name="combo"
+          formControlName="cdestado" [controlErrorsTpl]="Error" placeholder="Estado">
+          <option [ngValue]="null">Estado: </option>
+          <option value="A">Tarea</option>
+          <option value="P">Progreso</option>
+          <option value="R">Hecho</option>
+          <option value="I">Bloqueado</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button *ngIf="!isEditEnabled" type="submit" class="save" (click)="guardarTareas(timeForm)"
+          color="primary" [disabled]="timeForm.invalid">
+          <abbr title="Guardar y agregar">
+            <mat-icon id="icon-button">save add</mat-icon>
+          </abbr>
+        </button>
+
+        <button mat-icon *ngIf="!isEditEnabled" type="submit" class="save-exit" onclick=" window.location.reload()"
+          (click)="guardarTareas(timeForm)" [disabled]="timeForm.invalid" (click)="d('Cross click')">
+          <abbr title="Guardar y salir">
+            <mat-icon id="icon-button">save subdirectory_arrow_right</mat-icon>
+          </abbr>
+        </button>
+        <button (click)="refresh()" class="close" type="button" (click)="d('Cross click')">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </ng-template>
+
+
+  <ng-template class="template" #content2 let-c="close" let-d="dismiss">
+
+    <div class="modal-header">
+      <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+    </div>
+    <div class="modal-body2" *ngIf="datosRegistros">
+
+      <div class="cont-modal-1">
+        <h4 class="title-tarea">Nombre:</h4>
+        <p class="nom-tarea">{{ datosRegistros.cdregistro }}</p>
+        <h4>Descripción:</h4>
+        <p>{{ datosRegistros.dsregistro }}</p>
+        <div class="modal-atribute1">
+          <h4 class="title-tarea">Módulo:</h4>
+          <p class="nom-tarea">{{ datosRegistros.modulo }}</p>
+        </div>
+      </div>
+
+      <div class="cont-modal-2">
+        <h4 class="title-tarea">Horas estimadas: </h4>
+        <p class="nom-tarea">{{ datosRegistros.horasestimadas }}</p>
+        <h4 class="title-tarea">Horas totales: </h4>
+        <p class="nom-tarea">{{ datosRegistros.horastotales }}</p>
+        <button class="lanzar2" mat-icon (click)="openTimeRecord(content3)" mat-list-item>
+          <abbr title="Nuevo">
+            <mat-icon id="icon-add">add_circle</mat-icon>
+          </abbr>
+        </button>
+      </div>
+      <div class="table-modal">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" id="table"
+          class="table table-bordered hover table-borderless">
+          <thead>
+            <tr>
+              <th style="text-align:center">Jornada</th>
+              <th style="text-align:center">Fecha</th>
+              <th style="text-align:center">Horas usadas</th>
+              <th style="text-align:center">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="text-align:center;">
+              <td style="margin-top: 3%;">{{datosRegistros.jornada}}</td>
+              <td style="margin-top: 3%;">{{datosRegistros.fecha}}</td>
+              <td style="margin-top: 3%;">{{datosRegistros.horasreales}}</td>
+              <td>
+
+                <button class="edit" mat-icon>
+                  <abbr title="Editar">
+                    <mat-icon>edit</mat-icon>
+                  </abbr>
+                </button>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <ng-template class="template" #content3 let-c="close" let-d="dismiss">
+    <form [formGroup]="timeForm" errorTailor>
+      <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Registro</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+      </div>
+
+      <div class="modal-body">
+
+        <mat-icon id="icon-client"> edit_attributes</mat-icon><select class="option" name="combo"
+          formControlName="jornada" [controlErrorsTpl]="Error" placeholder="Jornada">
+          <option value="Diurna">Diurna</option>
+          <option value="Extra-Diurna">Extra-Diurna</option>
+        </select>
+        <br /> <br />
+        <div id="fecha-ini">
+          <mat-icon id="icon-client">calendar_today</mat-icon>
+          <input id="start" class="fecha-ini" type="date" formControlName="fecha" [controlErrorsTpl]="Error">
+        </div>
+
+        <ng-template let-error let-text="text" #Error>
+          <!-- {{error|json}}{{text}} -->
+
+          <div *ngIf="error?.minlength">
+            <i>
+              <b>Error:</b>No comples con los caracteres minomos que son ({{
+              error?.minlength?.requiredLength
+              }}),ingresaste solo:({{ error?.minlength?.actualLength }})</i>
+          </div>
+        </ng-template>
+        <br />
+        <br />
+        <div id="tiempo">
+          <mat-icon id="icon-client">alarm</mat-icon>
+          <input id="duracion" type="number" formControlName="horasreales" placeholder="Horas utilizadas"
+            [controlErrorsTpl]="Error" />
+        </div>
+      </div>
+      <br />
+
+
+      <div class="modal-footer">
+        <button *ngIf="!isEditEnabled" type="submit" class="save" (click)="guardarTareas(timeForm)" mat-raised-button
+          color="primary" [disabled]="timeForm.invalid">
+          <abbr title="Guardar y agregar">
+            <mat-icon id="icon-button">save add</mat-icon>
+          </abbr>
+        </button>
+
+        <button mat-icon *ngIf="!isEditEnabled" type="submit" class="save-exit" onclick=" window.location.reload()"
+          (click)="guardarTareas(timeForm)" [disabled]="timeForm.invalid" (click)="d('Cross click')">
+          <abbr title="Guardar y salir">
+            <mat-icon id="icon-button">save subdirectory_arrow_right</mat-icon>
+          </abbr>
+        </button>
+        <button (click)="refresh()" class="close" type="button" (click)="d('Cross click')">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </ng-template>
+  <button class="filter-button2" routerLink="/mis-proyectos" routerLinkActive='active' mat-icon>
+    <mat-icon style="margin-top: 10%;">arrow_back</mat-icon>
+  </button>
+  <div class="modal-header">
+    <h2 class="title">Registro de tiempos</h2>
+  </div>
+  <form [formGroup]="dateForm" class="form-date">
+    <div class="fecha">
+      <input class="calendario" type="date" formControlName="fechaCon" placeholder="Ingrese fecha" />
+    </div>
+    <button mat-icon type="submit" (click)="horasPorFecha(dateForm)" class="btn-fecha">
+      <abbr title="Consultar">
+        <mat-icon id="icon-button">save</mat-icon>
+      </abbr>
+    </button>
+  </form>
+  <abbr title="Horas Estimadas"><p class="total-horas">{{horas}}</p></abbr>
+  <div class="row">
+    <!-- tareas -->
+    <div cdkDropListGroup>
+      <div class="example-container">
+        <h2 class="head-title">
+          <p class="title-card">Tareas : {{ tarea.length }}</p>
+          <button class="lanzar" mat-icon (click)="open(content)" mat-list-item>
+            <abbr title="Nuevo">
+              <mat-icon id="icon-add">add_circle</mat-icon>
+            </abbr>
+          </button>
+        </h2>
+
+        <div cdkDropList [cdkDropListData]="tarea" class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of tarea; let i = index" cdkDrag>
+            <div id="description" style="width: 100%;">
+              <b style="font-size:small; display:inline-block">Nombre: </b>
+              <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.cdregistro }}</p>
+              <br />
+              <b style="font-size:small; display:inline-block">Descripción: </b>
+              <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.dsregistro }}</p>
+              <div class="box">
+                <button mat-icon-button color="warn" (click)="eliminarRecord(item.nmid)">
+                  <abbr title="Eliminar">
+                    <mat-icon class="icon-button2">delete</mat-icon>
+                  </abbr>
+                </button>
+                <button mat-icon-button color="primary" (click)="editar(i, item)" (click)="openEdit(content)">
+                  <abbr title="Editar">
+                    <mat-icon class="icon-button">edit</mat-icon>
+                  </abbr>
+                </button>
+                <button mat-icon-button color="primary" (click)="openView(content2,item.nmid)">
+                  <abbr title="Ver más">
+                    <mat-icon class="icon-button">visibility</mat-icon>
+                  </abbr>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- progresos -->
+
+      <div class="example-container">
+        <h2 class="head-title">
+          <p class="title-card">Progreso : {{ progreso.length }}</p>
+          <button class="lanzar" mat-icon (click)="open(content)" mat-list-item>
+            <abbr title="Nuevo">
+              <mat-icon id="icon-add">add_circle</mat-icon>
+            </abbr>
+          </button>
+        </h2>
+
+        <div cdkDropList [cdkDropListData]="progreso" class="example-list" (cdkDropListDropped)="drop($event)">
+          <div class="example-box" *ngFor="let item of progreso; let i = index" cdkDrag>
+            <div id="description" style="width: 100%;">
+              <b style="font-size:small; display:inline-block">Nombre: </b>
+              <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.cdregistro }}</p>
+              <br />
+              <b style="font-size:small; display:inline-block">Descripción: </b>
+              <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.dsregistro }}</p>
+              <div class="box">
+                <button mat-icon-button color="warn" (click)="eliminarRecord(item.nmid)">
+                  <abbr title="Eliminar">
+                    <mat-icon class="icon-button2">delete</mat-icon>
+                  </abbr>
+                </button>
+                <button mat-icon-button color="primary" (click)="editar(i, item)" (click)="openEdit(content)">
+                  <abbr title="Editar">
+                    <mat-icon class="icon-button">edit</mat-icon>
+                  </abbr>
+                </button>
+                <button mat-icon-button color="primary" (click)="openView(content2,item.nmid)">
+                  <abbr title="Ver más">
+                    <mat-icon class="icon-button">visibility</mat-icon>
+                  </abbr>
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- resueltas -->
+      <div class="example-container">
+        <h2 class="head-title">
+          <p class="title-card">Hechas : {{ hecho.length }}</p>
+          <button class="lanzar" mat-icon (click)="open(content)" mat-list-item>
+            <abbr title="Nuevo">
+              <mat-icon id="icon-add">add_circle</mat-icon>
+            </abbr>
+          </button>
+        </h2>
+        <div id="description">
+          <div cdkDropList [cdkDropListData]="hecho" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of hecho; let i = index" cdkDrag>
+              <div id="description" style="width: 100%;">
+                <b style="font-size:small; display:inline-block">Nombre: </b>
+                <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.cdregistro }}</p>
+                <br />
+                <b style="font-size:small; display:inline-block">Descripción: </b>
+                <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.dsregistro }}</p>
+                <div class="box">
+                  <button mat-icon-button color="primary" (click)="openView(content2,item.nmid)">
+                    <abbr title="Ver más">
+                      <mat-icon class="icon-button">visibility</mat-icon>
+                    </abbr>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pausadas -->
+      <div class="example-container">
+        <h2 class="head-title">
+          <p class="title-card">Bloqueadas:{{ pausada.length }}</p>
+          <button class="lanzar" mat-icon (click)="open(content)" mat-list-item>
+            <abbr title="Nuevo">
+              <mat-icon id="icon-add">add_circle</mat-icon>
+            </abbr>
+          </button>
+        </h2>
+        <div id="description">
+          <div cdkDropList [cdkDropListData]="pausada" class="example-list" (cdkDropListDropped)="drop($event)">
+            <div class="example-box" *ngFor="let item of pausada; let i = index" cdkDrag>
+              <div id="description" style="width: 100%;">
+                <b style="font-size:small; display:inline-block">Nombre: </b>
+                <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.cdregistro }}</p>
+                <br />
+                <b style="font-size:small; display:inline-block">Descripción: </b>
+                <p style="font-size:small; display:inline-block; margin-left: 1vw;">{{ item.dsregistro }}</p>
+                <div class="box">
+                  <button mat-icon-button color="primary" (click)="openView(content2,item.nmid)">
+                    <abbr title="Ver más">
+                      <mat-icon class="icon-button">visibility</mat-icon>
+                    </abbr>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
